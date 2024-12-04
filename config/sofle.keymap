@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2020 The ZMK Contributors
  *
@@ -25,6 +26,14 @@
         adjust_layer {
             if-layers = <2 3>;
             then-layer = <4>;
+        };
+    };
+    combos {
+        compatible = "zmk,combos";
+
+        unlock {
+            bindings = <&studio_unlock>;
+            key-positions = <0 11>;
         };
     };
 
