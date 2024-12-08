@@ -77,11 +77,11 @@
             //               | GUI | ALT  | CTRL | ENTER|  LOWER |  | RAISE | SPACE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&none  &kp N1          &kp N2          &kp N3           &kp N4           &kp N5                                       &kp N6     &kp N7           &kp N8           &kp N9          &kp N0               &none
-&none  &kp Q           &kp W           &kp F            &kp P            &kp B                                        &kp J      &kp L            &kp U            &kp Y           &kp SEMI             &none
-&none  &u_mt_l LGUI A  &u_mt_l LALT R  &u_mt_l LCTRL S  &u_mt_l LSHFT T  &kp G                                        &kp M      &u_mt_r RSHFT N  &u_mt_r RCTRL E  &u_mt_r RALT I  &u_mt_r RIGHT_GUI O  &none
-&none  &kp Z           &kp X           &kp C            &kp D            &kp V    &kp C_MUTE       &none              &kp K      &kp H            &kp COMMA        &kp DOT         &kp FSLH             &none
-                       &none           &none            &kp ESC          &kp RET  &u_lt 4 ENTER    &u_lt 5 BACKSPACE  &kp SPACE  &u_lt 5 DELETE   &none            &none
+&none  &kp N1          &kp N2          &kp N3           &kp N4           &kp N5                                           &kp N6         &kp N7           &kp N8           &kp N9          &kp N0               &none
+&none  &kp Q           &kp W           &kp F            &kp P            &kp B                                            &kp J          &kp L            &kp U            &kp Y           &kp SEMI             &none
+&none  &u_mt_l LGUI A  &u_mt_l LALT R  &u_mt_l LCTRL S  &u_mt_l LSHFT T  &kp G                                            &kp M          &u_mt_r RSHFT N  &u_mt_r RCTRL E  &u_mt_r RALT I  &u_mt_r RIGHT_GUI O  &none
+&none  &kp Z           &kp X           &kp C            &kp D            &kp V          &kp C_MUTE     &none              &kp K          &kp H            &kp COMMA        &kp DOT         &kp FSLH             &none
+                       &none           &none            &u_lt 4 ESC      &u_lt 1 ENTER  &u_lt 2 TAB    &u_lt 7 BACKSPACE  &u_lt 3 SPACE  &u_lt 7 DELETE   &none            &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -89,11 +89,11 @@
 
         Nav {
             bindings = <
-&none  &none     &none     &none      &none      &none                  &none      &none           &none           &none            &none       &none
-&none  &none     &none     &none      &none      &none                  &kp PG_UP  &kp HOME        &kp UP_ARROW    &kp END          &kp INS     &none
-&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &none                  &kp PG_DN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &caps_word  &none
-&none  &none     &none     &none      &none      &none  &none    &none  &kp LC(Y)  &kp LC(X)       &kp LC(C)       &kp LC(V)        &kp LC(Z)   &none
-                 &none     &none      &none      &none  &none    &none  &none      &none           &none           &none
+&none  &none     &none     &none      &none      &none                     &none      &none           &none           &none            &none       &none
+&none  &none     &none     &none      &none      &none                     &kp PG_UP  &kp HOME        &kp UP_ARROW    &kp END          &kp INS     &none
+&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &none                     &kp PG_DN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &caps_word  &none
+&none  &none     &none     &none      &none      &none   &none     &none   &kp LC(Y)  &kp LC(X)       &kp LC(C)       &kp LC(V)        &kp LC(Z)   &none
+                 &none     &none      &trans     &trans  &trans    &trans  &trans     &trans          &none           &none
             >;
 
             label = "Nav";
@@ -101,14 +101,44 @@
 
         Num {
             bindings = <
-&none  &none     &none     &none      &none      &none                  &none      &kp ESC  &kp FSLH  &kp ASTRK  &kp MINUS  &none
-&none  &none     &none     &none      &none      &none                  &kp PG_UP  &kp N7   &kp N8    &kp N9     &kp PLUS   &none
-&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &none                  &kp PG_DN  &kp N4   &kp N5    &kp N6     &kp ENTER  &none
-&none  &none     &none     &none      &none      &none  &none    &none  &none      &kp N1   &kp N2    &kp N3     &kp ENTER  &none
-                 &none     &none      &none      &none  &none    &none  &kp N0     &kp N0   &kp N0    &kp DOT
+&none  &none     &none     &none      &none      &none                    &none      &kp ESC  &kp FSLH  &kp ASTRK  &kp MINUS  &none
+&none  &none     &none     &none      &none      &none                    &kp PG_UP  &kp N7   &kp N8    &kp N9     &kp PLUS   &none
+&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &none                    &kp PG_DN  &kp N4   &kp N5    &kp N6     &kp ENTER  &none
+&none  &none     &none     &none      &none      &none   &none     &none  &none      &kp N1   &kp N2    &kp N3     &kp ENTER  &none
+                 &none     &none      &trans     &trans  &trans    &none  &kp N0     &kp N0   &kp N0    &kp DOT
             >;
 
             label = "Num";
+        };
+
+        Sym {
+            bindings = <
+&none  &none           &none             &none              &none                 &none                                       &none   &none      &none      &none     &none     &none
+&none  &kp LEFT_BRACE  &kp AMPS          &kp ASTRK          &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE                             &none   &none      &none      &none     &none     &none
+&none  &kp COLON       &kp DOLLAR        &kp PERCENT        &kp CARET             &kp PLUS                                    &none   &kp LSHFT  &kp LCTRL  &kp LALT  &kp LGUI  &none
+&none  &kp TILDE       &kp EXCL          &kp AT             &kp POUND             &kp PIPE               &none        &none   &none   &none      &none      &none     &none     &none
+                       &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDER    &trans  &trans  &trans     &none      &none
+            >;
+
+            label = "Sym";
+        };
+
+        adjust_layer {
+            // ----------------------------------------------------------------------------------------------------------------------------
+            // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
+            // | EXTPWR | RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
+            // |        | RGB_BRD | RGB_BRI |         |         |         |                  |      |      |       |      |       |       |
+            // |        |         |         |         |         |         | RGB_TOG | |      |      |      |       |      |       |       |
+            //                    |         |         |         |         |         | |      |      |      |       |      |
+
+            display-name = "adjust";
+            bindings = <
+&none  &none     &none     &none      &none      &none                    &none            &none            &none            &none            &none            &none
+&none  &none     &none     &none      &none      &none                    &bt BT_CLR       &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &bt BT_SEL 4
+&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &none                    &none            &none            &none            &none            &none            &none
+&none  &none     &none     &none      &none      &none   &none     &none  &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI
+                 &none     &none      &trans     &trans  &trans    &none  &none            &none            &none            &none
+            >;
         };
 
         Extra {
@@ -126,7 +156,7 @@
 &kp ESC    &kp Q   &kp W     &kp E     &kp R      &kp T                            &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSPC
 &kp TAB    &kp A   &kp S     &kp D     &kp F      &kp G                            &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z   &kp X     &kp C     &kp V      &kp B   &kp C_MUTE    &none      &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-                   &kp LGUI  &kp LALT  &kp LCTRL  &mo 4   &kp RET       &kp SPACE  &mo 5   &kp RCTRL  &kp RALT   &kp RGUI
+                   &kp LGUI  &kp LALT  &kp LCTRL  &mo 6   &kp RET       &kp SPACE  &mo 7   &kp RCTRL  &kp RALT   &kp RGUI
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -173,24 +203,6 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-        };
-
-        adjust_layer {
-            // ----------------------------------------------------------------------------------------------------------------------------
-            // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
-            // | EXTPWR | RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
-            // |        | RGB_BRD | RGB_BRI |         |         |         |                  |      |      |       |      |       |       |
-            // |        |         |         |         |         |         | RGB_TOG | |      |      |      |       |      |       |       |
-            //                    |         |         |         |         |         | |      |      |      |       |      |
-
-            display-name = "adjust";
-            bindings = <
-&none  &none     &none     &none      &none      &none                  &none            &none            &none            &none            &none            &none
-&none  &none     &none     &none      &none      &none                  &bt BT_CLR       &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &bt BT_SEL 4
-&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &none                  &none            &none            &none            &none            &none            &none
-&none  &none     &none     &none      &none      &none  &none    &none  &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI
-                 &none     &none      &none      &none  &none    &none  &none            &none            &none            &none
-            >;
         };
 
         extra4 { status = "reserved"; };
