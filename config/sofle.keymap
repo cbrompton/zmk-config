@@ -16,7 +16,6 @@
 #define ADJUST 4
 
 / {
-    // Activate ADJUST layer by pressing raise and lower
 
     conditional_layers { compatible = "zmk,conditional-layers"; };
 
@@ -141,7 +140,7 @@
             //               | GUI | ALT  | CTRL | ENTER|  LOWER |  | RAISE | SPACE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&none  &kp N1          &kp N2          &kp N3           &kp N4           &kp N5                                           &kp N6         &kp N7           &kp N8           &kp N9          &kp N0               &none
+&none  &kp N1          &kp N2          &kp N3           &kp N4           &kp N5                                           &kp N6         &kp N7           &kp N8           &kp N9          &kp N0               &kp BSPC
 &none  &kp Q           &kp W           &kp F            &kp P            &kp B                                            &kp J          &kp L            &kp U            &kp Y           &kp SEMI             &none
 &none  &u_mt_l LGUI A  &u_mt_l LALT R  &u_mt_l LCTRL S  &u_mt_l LSHFT T  &kp G                                            &kp M          &u_mt_r RSHFT N  &u_mt_r RCTRL E  &u_mt_r RALT I  &u_mt_r RIGHT_GUI O  &kp APOS
 &none  &kp Z           &kp X           &kp C            &kp D            &kp V          &kp C_MUTE     &none              &kp K          &kp H            &kp COMMA        &kp DOT         &kp FSLH             &none
@@ -203,7 +202,7 @@
             bindings = <
 &none  &none     &none        &none          &none         &none                    &none      &kp ESC  &kp FSLH  &kp ASTRK  &kp MINUS  &none
 &none  &U_boot   &u_to_U_TAP  &u_to_U_EXTRA  &u_to_U_BASE  &none                    &kp PG_UP  &kp N7   &kp N8    &kp N9     &kp PLUS   &none
-&none  &kp LGUI  &kp LALT     &kp LCTRL      &kp LSHFT     &none                    &kp PG_DN  &kp N4   &kp N5    &kp N6     &kp ENTER  &none
+&none  &kp LGUI  &kp LALT     &kp LCTRL      &kp LSHFT     &none                    &kp PG_DN  &kp N4   &kp N5    &kp N6     &kp EQUAL  &none
 &none  &none     &none        &none          &none         &none   &none     &none  &none      &kp N1   &kp N2    &kp N3     &kp ENTER  &none
                  &none        &none          &trans        &trans  &trans    &none  &kp N0     &kp N0   &kp N0    &kp DOT
             >;
@@ -224,13 +223,6 @@
         };
 
         adjust_layer {
-            // ----------------------------------------------------------------------------------------------------------------------------
-            // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
-            // | EXTPWR | RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
-            // |        | RGB_BRD | RGB_BRI |         |         |         |                  |      |      |       |      |       |       |
-            // |        |         |         |         |         |         | RGB_TOG | |      |      |      |       |      |       |       |
-            //                    |         |         |         |         |         | |      |      |      |       |      |
-
             display-name = "adjust";
             bindings = <
 &none  &none     &none        &none          &none         &none                    &none            &none            &none         &none         &none         &none
