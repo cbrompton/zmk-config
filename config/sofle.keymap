@@ -127,7 +127,7 @@
         mse_rgt: mse_rgt {
             compatible = "zmk,behavior-mod-morph";
             label = "MOUSE/SCROLL_RGT";
-            bindings = <&mmv MOVE_RGT>, <&msc SCRL_RGT>;
+            bindings = <&mmv MOVE_RIGHT>, <&msc SCRL_RIGHT>;
 
             #binding-cells = <0>;
             mods = <(MOD_RSFT|MOD_LSFT)>;
