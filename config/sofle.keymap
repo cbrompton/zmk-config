@@ -40,7 +40,7 @@
             bindings = <&mo>, <&kp>;
 
             #binding-cells = <2>;
-            tapping-term-ms = <250>;
+            tapping-term-ms = <220>;
             flavor = "tap-preferred";
         };
 
@@ -52,7 +52,7 @@
             #binding-cells = <2>;
             flavor = "tap-preferred";
             hold-trigger-key-positions = <6 18 30 44 56 57 45 31 19 7 8 20 32 46 58 59 47 33 21 9 10 22 34 48 49 35 23 11 55 43>;
-            tapping-term-ms = <280>;
+            tapping-term-ms = <240>;
         };
 
         u_mt_r: u_mt_r {
@@ -63,7 +63,7 @@
             #binding-cells = <2>;
             flavor = "tap-preferred";
             hold-trigger-key-positions = <0 12 24 36 37 25 13 1 2 14 26 38 50 51 39 27 15 3 4 28 16 40 52 53 41 17 29 5 54 42>;
-            tapping-term-ms = <280>;
+            tapping-term-ms = <240>;
         };
 
         rgb_hue: rgb_hue {
