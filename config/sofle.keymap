@@ -11,8 +11,6 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
-#include <dt-bindings/zmk/pointing.h>
-#include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 
 #define BASE 0
@@ -173,6 +171,7 @@
             #binding-cells = <0>;
             bindings = <&kp C &kp B &kp R &kp O &kp M &kp P &kp T &kp O &kp N &kp AT &kp D &kp E &kp L &kp T &kp A &kp C &kp O &kp N &kp T &kp R &kp O &kp L &kp S &kp DOT &kp C &kp O &kp M>;
             label = "WORK_EMAIL";
+            tap-ms = <5>;
         };
     };
 
