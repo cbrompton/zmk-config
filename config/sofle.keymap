@@ -237,11 +237,11 @@
 
         Nav {
             bindings = <
-&none  &none     &none        &none          &none         &none                     &none      &none           &none           &none            &none       &none
-&none  &U_boot   &u_to_U_TAP  &u_to_U_EXTRA  &u_to_U_BASE  &none                     &kp PG_UP  &kp HOME        &kp UP_ARROW    &kp END          &kp INS     &none
-&none  &kp LGUI  &kp LALT     &kp LCTRL      &kp LSHFT     &none                     &kp PG_DN  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &caps_word  &none
-&none  &none     &none        &none          &none         &none   &none     &none   &kp LC(Y)  &kp LC(X)       &kp LC(C)       &kp LC(V)        &kp LC(Z)   &none
-                 &none        &none          &trans        &trans  &trans    &trans  &trans     &trans          &none           &none
+&none  &none     &none        &none          &none         &none                     &none          &none           &none           &none            &none       &none
+&none  &U_boot   &u_to_U_TAP  &u_to_U_EXTRA  &u_to_U_BASE  &none                     &kp PG_UP      &kp HOME        &kp UP_ARROW    &kp END          &kp INS     &none
+&none  &kp LGUI  &kp LALT     &kp LCTRL      &kp LSHFT     &none                     &kp PG_DN      &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &caps_word  &none
+&none  &none     &none        &none          &none         &none   &none     &none   &kp LG(LS(Y))  &kp LG(X)       &kp LG(C)       &kp LG(V)        &kp LG(Z)   &none
+                 &none        &none          &trans        &trans  &trans    &trans  &trans         &trans          &none           &none
             >;
 
             label = "Nav";
