@@ -13,15 +13,19 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 
-#define BASE 0
-#define COLEM 1
-#define LOWER 2
-#define RAISE 3
-#define ADJUST 4
+// Layer indices. Used everywhere a layer is referenced so the bindings stay
+// self-documenting and renumbering is a one-line change.
+#define BASE   0
+#define TAP    1
+#define EXTRA  2
+#define NAV    3
+#define NUM    4
+#define SYM    5
+#define ADJUST 6
+#define MOUSE  7
+// 8 (extra4) and 9 are reserved/spare slots for ZMK Studio runtime layers.
 
 / {
-    conditional_layers { compatible = "zmk,conditional-layers"; };
-
     combos {
         compatible = "zmk,combos";
 
@@ -32,146 +36,148 @@
     };
 
     behaviors {
+        // Layer-tap: hold = momentary layer, tap = keypress.
         u_lt: u_lt {
             compatible = "zmk,behavior-hold-tap";
             label = "U_LT";
-            bindings = <&mo>, <&kp>;
-
             #binding-cells = <2>;
+            flavor = "tap-preferred";
             tapping-term-ms = <220>;
-            flavor = "tap-preferred";
+            bindings = <&mo>, <&kp>;
         };
 
-        u_mt_l: u_mt_l {
+        // Home-row mods, left hand: only trigger the hold on a right-hand key.
+        u_hml: u_hml {
             compatible = "zmk,behavior-hold-tap";
-            label = "U_MT_L";
-            bindings = <&kp>, <&kp>;
-
+            label = "U_HML";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <6 18 30 44 56 57 45 31 19 7 8 20 32 46 58 59 47 33 21 9 10 22 34 48 49 35 23 11 55 43>;
-            tapping-term-ms = <240>;
+            hold-trigger-on-release;
         };
 
-        u_mt_r: u_mt_r {
+        // Home-row mods, right hand: only trigger the hold on a left-hand key.
+        u_hmr: u_hmr {
             compatible = "zmk,behavior-hold-tap";
-            label = "U_MT_R";
-            bindings = <&kp>, <&kp>;
-
+            label = "U_HMR";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <0 12 24 36 37 25 13 1 2 14 26 38 50 51 39 27 15 3 4 28 16 40 52 53 41 17 29 5 54 42>;
-            tapping-term-ms = <240>;
+            hold-trigger-on-release;
         };
 
-        rgb_hue: rgb_hue {
+        // RGB controls: tap = increase, shift+tap = decrease.
+        u_rgb_hue: u_rgb_hue {
             compatible = "zmk,behavior-mod-morph";
             label = "RGB_HUE";
-            bindings = <&rgb_ug RGB_HUI>, <&rgb_ug RGB_HUD>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&rgb_ug RGB_HUI>, <&rgb_ug RGB_HUD>;
         };
 
-        rgb_sat: rgb_sat {
+        u_rgb_sat: u_rgb_sat {
             compatible = "zmk,behavior-mod-morph";
             label = "RGB_SAT";
-            bindings = <&rgb_ug RGB_SAI>, <&rgb_ug RGB_SAD>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&rgb_ug RGB_SAI>, <&rgb_ug RGB_SAD>;
         };
 
-        rgb_brt: rgb_brt {
+        u_rgb_brt: u_rgb_brt {
             compatible = "zmk,behavior-mod-morph";
             label = "RGB_BRT";
-            bindings = <&rgb_ug RGB_BRI>, <&rgb_ug RGB_BRD>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&rgb_ug RGB_BRI>, <&rgb_ug RGB_BRD>;
         };
 
-        rgb_spe: rgb_spe {
+        u_rgb_spe: u_rgb_spe {
             compatible = "zmk,behavior-mod-morph";
             label = "RGB_SPE";
-            bindings = <&rgb_ug RGB_SPI>, <&rgb_ug RGB_SPD>;
-
             #binding-cells = <0>;
-            mods = <(MOD_RSFT|MOD_LSFT)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&rgb_ug RGB_SPI>, <&rgb_ug RGB_SPD>;
         };
 
-        mse_up: mse_up {
+        // Pointer: tap = move, shift+tap = scroll.
+        u_mse_up: u_mse_up {
             compatible = "zmk,behavior-mod-morph";
             label = "MOUSE/SCROLL_UP";
-            bindings = <&mmv MOVE_UP>, <&msc SCRL_UP>;
-
             #binding-cells = <0>;
-            mods = <(MOD_RSFT|MOD_LSFT)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&mmv MOVE_UP>, <&msc SCRL_UP>;
         };
 
-        mse_dn: mse_dn {
+        u_mse_dn: u_mse_dn {
             compatible = "zmk,behavior-mod-morph";
             label = "MOUSE/SCROLL_DN";
-            bindings = <&mmv MOVE_DOWN>, <&msc SCRL_DOWN>;
-
             #binding-cells = <0>;
-            mods = <(MOD_RSFT|MOD_LSFT)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&mmv MOVE_DOWN>, <&msc SCRL_DOWN>;
         };
 
-        mse_lft: mse_lft {
+        u_mse_lft: u_mse_lft {
             compatible = "zmk,behavior-mod-morph";
             label = "MOUSE/SCROLL_LFT";
-            bindings = <&mmv MOVE_LEFT>, <&msc SCRL_LEFT>;
-
             #binding-cells = <0>;
-            mods = <(MOD_RSFT|MOD_LSFT)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&mmv MOVE_LEFT>, <&msc SCRL_LEFT>;
         };
 
-        mse_rgt: mse_rgt {
+        u_mse_rgt: u_mse_rgt {
             compatible = "zmk,behavior-mod-morph";
             label = "MOUSE/SCROLL_RGT";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
             bindings = <&mmv MOVE_RIGHT>, <&msc SCRL_RIGHT>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_RSFT|MOD_LSFT)>;
         };
 
-        u_to_U_BASE: u_to_U_BASE {
+        // Tap-dances: tap once = nothing, tap twice = the action (guards
+        // against accidental layer/bootloader/base switches).
+        u_td_base: u_td_base {
             compatible = "zmk,behavior-tap-dance";
-            label = "U_TO_U_BASE";
+            label = "U_TD_BASE";
             #binding-cells = <0>;
-            bindings = <&none>, <&to 0>;
+            bindings = <&none>, <&to BASE>;
         };
 
-        u_to_U_EXTRA: u_to_U_EXTRA {
+        u_td_qwerty: u_td_qwerty {
             compatible = "zmk,behavior-tap-dance";
-            label = "U_TO_U_EXTRA";
+            label = "U_TD_QWERTY";
             #binding-cells = <0>;
-            bindings = <&none>, <&to 2>;
+            bindings = <&none>, <&to EXTRA>;
         };
 
-        U_boot: U_boot {
+        u_td_tap: u_td_tap {
             compatible = "zmk,behavior-tap-dance";
-            label = "U_BOOT";
+            label = "U_TD_TAP";
+            #binding-cells = <0>;
+            bindings = <&none>, <&to TAP>;
+        };
+
+        u_td_boot: u_td_boot {
+            compatible = "zmk,behavior-tap-dance";
+            label = "U_TD_BOOT";
             #binding-cells = <0>;
             bindings = <&none>, <&bootloader>;
-        };
-
-        u_to_U_TAP: u_to_U_TAP {
-            compatible = "zmk,behavior-tap-dance";
-            label = "U_TO_U_TAP";
-            #binding-cells = <0>;
-            bindings = <&none>, <&to 1>;
         };
     };
 
     macros {
-        work_email: work_email {
+        u_work_email: u_work_email {
             compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp C &kp B &kp R &kp O &kp M &kp P &kp T &kp O &kp N &kp AT &kp D &kp E &kp L &kp T &kp A &kp C &kp O &kp N &kp T &kp R &kp O &kp L &kp S &kp DOT &kp C &kp O &kp M>;
             label = "WORK_EMAIL";
+            #binding-cells = <0>;
             tap-ms = <5>;
+            bindings = <&kp C &kp B &kp R &kp O &kp M &kp P &kp T &kp O &kp N &kp AT &kp D &kp E &kp L &kp T &kp A &kp C &kp O &kp N &kp T &kp R &kp O &kp L &kp S &kp DOT &kp C &kp O &kp M>;
         };
     };
 
@@ -189,32 +195,31 @@
             //               | GUI | ALT  | CTRL | ENTER|  LOWER |  | RAISE | SPACE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&none  &kp N1          &kp N2          &kp N3           &kp N4           &kp N5                                           &kp N6         &kp N7           &kp N8           &kp N9          &kp N0               &kp BSPC
-&none  &kp Q           &kp W           &kp F            &kp P            &kp B                                            &kp J          &kp L            &kp U            &kp Y           &kp SEMI             &none
-&none  &u_mt_l LGUI A  &u_mt_l LALT R  &u_mt_l LCTRL S  &u_mt_l LSHFT T  &kp G                                            &kp M          &u_mt_r RSHFT N  &u_mt_r RCTRL E  &u_mt_r RALT I  &u_mt_r RIGHT_GUI O  &kp APOS
-&none  &kp Z           &kp X           &kp C            &kp D            &kp V          &kp C_MUTE     &kp PSCRN          &kp K          &kp H            &kp COMMA        &kp DOT         &kp FSLH             &none
-                       &work_email     &mo 7            &u_lt 6 ESC      &u_lt 3 ENTER  &u_lt 4 TAB    &u_lt 0 BACKSPACE  &u_lt 5 SPACE  &u_lt 0 DELETE   &none            &none
+&none  &kp N1          &kp N2          &kp N3           &kp N4           &kp N5                                       &kp N6         &kp N7           &kp N8           &kp N9          &kp N0               &kp BSPC
+&none  &kp Q           &kp W           &kp F            &kp P            &kp B                                        &kp J          &kp L            &kp U            &kp Y           &kp SEMI             &none
+&none  &u_hml LGUI A  &u_hml LALT R  &u_hml LCTRL S  &u_hml LSHFT T  &kp G                                        &kp M          &u_hmr RSHFT N  &u_hmr RCTRL E  &u_hmr RALT I  &u_hmr RIGHT_GUI O  &kp APOS
+&none  &kp Z           &kp X           &kp C            &kp D            &kp V       &kp C_MUTE  &kp PSCRN            &kp K          &kp H            &kp COMMA        &kp DOT         &kp FSLH             &none
+                       &u_work_email     &mo MOUSE        &u_lt ADJUST ESC  &u_lt NAV ENTER  &u_lt NUM TAB  &u_lt BASE BACKSPACE  &u_lt SYM SPACE  &u_lt BASE DELETE  &none  &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
-        TAP {
+        Tap {
             display-name = "Tap";
+
             bindings = <
-&kp ESC    &kp N1  &kp N2     &kp N3    &kp N4            &kp N5                                           &kp N6         &kp N7          &kp N8     &kp N9     &kp N0    &kp BSPC
-&kp TAB    &kp Q   &kp W      &kp F     &kp P             &kp B                                            &kp J          &kp L           &kp U      &kp Y      &kp SEMI  &none
-&kp CAPS   &kp A   &kp R      &kp S     &kp T             &kp G                                            &kp M          &kp N           &kp E      &kp I      &kp O     &none
-&kp LSHFT  &kp Z   &kp X      &kp C     &kp D             &kp V          &kp C_MUTE     &none              &kp K          &kp H           &kp COMMA  &kp DOT    &kp FSLH  &kp RSHFT
-                   &kp LCTRL  &kp LGUI  &u_lt 6 LEFT_ALT  &u_lt 3 ENTER  &u_lt 4 TAB    &u_lt 0 BACKSPACE  &u_lt 5 SPACE  &u_lt 0 DELETE  &kp RGUI   &kp RCTRL
+&kp ESC    &kp N1  &kp N2     &kp N3    &kp N4                 &kp N5                                            &kp N6         &kp N7           &kp N8     &kp N9     &kp N0    &kp BSPC
+&kp TAB    &kp Q   &kp W      &kp F     &kp P                  &kp B                                             &kp J          &kp L            &kp U      &kp Y      &kp SEMI  &none
+&kp CAPS   &kp A   &kp R      &kp S     &kp T                  &kp G                                             &kp M          &kp N            &kp E      &kp I      &kp O     &none
+&kp LSHFT  &kp Z   &kp X      &kp C     &kp D                  &kp V          &kp C_MUTE  &none                 &kp K          &kp H            &kp COMMA  &kp DOT    &kp FSLH  &kp RSHFT
+                   &kp LCTRL  &kp LGUI  &u_lt ADJUST LEFT_ALT  &u_lt NAV ENTER  &u_lt NUM TAB  &u_lt BASE BACKSPACE  &u_lt SYM SPACE  &u_lt BASE DELETE  &kp RGUI  &kp RCTRL
             >;
 
-            sensor-bindings =
-                <&inc_dec_kp C_VOL_UP C_VOL_DN>,
-                <&inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
-        Extra {
+        Qwerty {
             display-name = "QWERTY";
 
             // ------------------------------------------------------------------------------------------------------------
@@ -225,79 +230,82 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&kp GRAVE  &kp N1  &kp N2    &kp N3    &kp N4         &kp N5                           &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &none
-&kp ESC    &kp Q   &kp W     &kp E     &kp R          &kp T                            &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSPC
-&kp TAB    &kp A   &kp S     &kp D     &kp F          &kp G                            &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z   &kp X     &kp C     &kp V          &kp B   &kp C_MUTE    &none      &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-                   &kp LGUI  &kp LALT  &u_lt 6 LCTRL  &mo 3   &kp RET       &kp SPACE  &mo 5   &kp RCTRL  &kp RALT   &kp RGUI
+&kp GRAVE  &kp N1  &kp N2    &kp N3    &kp N4              &kp N5                          &kp N6   &kp N7     &kp N8     &kp N9    &kp N0    &none
+&kp ESC    &kp Q   &kp W     &kp E     &kp R               &kp T                           &kp Y    &kp U      &kp I      &kp O     &kp P     &kp BSPC
+&kp TAB    &kp A   &kp S     &kp D     &kp F               &kp G                           &kp H    &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z   &kp X     &kp C     &kp V               &kp B   &kp C_MUTE  &none       &kp N    &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
+                   &kp LGUI  &kp LALT  &u_lt ADJUST LCTRL  &mo NAV  &kp RET    &kp SPACE   &mo SYM  &kp RCTRL  &kp RALT   &kp RGUI
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         Nav {
+            display-name = "Nav";
+
             bindings = <
 &none  &none     &none        &none          &none         &none                     &none          &none           &none           &none            &none       &none
-&none  &U_boot   &u_to_U_TAP  &u_to_U_EXTRA  &u_to_U_BASE  &none                     &kp PG_UP      &kp HOME        &kp UP_ARROW    &kp END          &kp INS     &none
+&none  &u_td_boot   &u_td_tap  &u_td_qwerty  &u_td_base  &none                     &kp PG_UP      &kp HOME        &kp UP_ARROW    &kp END          &kp INS     &none
 &none  &kp LGUI  &kp LALT     &kp LCTRL      &kp LSHFT     &none                     &kp PG_DN      &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &caps_word  &none
 &none  &none     &none        &none          &none         &none   &none     &none   &kp LG(LS(Y))  &kp LG(X)       &kp LG(C)       &kp LG(V)        &kp LG(Z)   &none
                  &none        &none          &trans        &trans  &trans    &trans  &trans         &trans          &none           &none
             >;
-
-            label = "Nav";
         };
 
         Num {
+            display-name = "Num";
+
             bindings = <
 &none  &none     &none        &none          &none         &none                    &none      &kp ESC  &kp FSLH  &kp ASTRK  &kp MINUS  &none
-&none  &U_boot   &u_to_U_TAP  &u_to_U_EXTRA  &u_to_U_BASE  &none                    &kp PG_UP  &kp N7   &kp N8    &kp N9     &kp PLUS   &none
+&none  &u_td_boot   &u_td_tap  &u_td_qwerty  &u_td_base  &none                    &kp PG_UP  &kp N7   &kp N8    &kp N9     &kp PLUS   &none
 &none  &kp LGUI  &kp LALT     &kp LCTRL      &kp LSHFT     &none                    &kp PG_DN  &kp N4   &kp N5    &kp N6     &kp EQUAL  &none
 &none  &none     &none        &none          &none         &none   &none     &none  &none      &kp N1   &kp N2    &kp N3     &kp ENTER  &none
                  &none        &none          &trans        &trans  &trans    &none  &kp N0     &kp N0   &kp N0    &kp DOT
             >;
-
-            label = "Num";
         };
 
         Sym {
+            display-name = "Sym";
+
             bindings = <
 &none  &none           &none             &none              &none                 &none                                       &none   &none         &none          &none        &none     &none
-&none  &kp LEFT_BRACE  &kp AMPS          &kp ASTRK          &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE                             &none   &u_to_U_BASE  &u_to_U_EXTRA  &u_to_U_TAP  &U_boot   &none
+&none  &kp LEFT_BRACE  &kp AMPS          &kp ASTRK          &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE                             &none   &u_td_base  &u_td_qwerty  &u_td_tap  &u_td_boot   &none
 &none  &kp COLON       &kp DOLLAR        &kp PERCENT        &kp CARET             &kp PLUS                                    &none   &kp LSHFT     &kp LCTRL      &kp LALT     &kp LGUI  &none
 &none  &kp TILDE       &kp EXCL          &kp AT             &kp POUND             &kp BACKSLASH          &none        &none   &none   &none         &none          &none        &none     &none
                        &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDER    &trans  &trans  &trans        &none          &none
             >;
-
-            label = "Sym";
         };
 
-        adjust_layer {
-            display-name = "adjust";
+        Adjust {
+            display-name = "Adjust";
+
             bindings = <
 &none  &none     &none        &none          &none         &none                    &none            &none            &none         &none         &none         &none
-&none  &U_boot   &u_to_U_TAP  &u_to_U_EXTRA  &u_to_U_BASE  &none                    &bt BT_CLR       &bt BT_SEL 0     &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&none  &u_td_boot   &u_td_tap  &u_td_qwerty  &u_td_base  &none                    &bt BT_CLR       &bt BT_SEL 0     &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
 &none  &kp LGUI  &kp LALT     &kp LCTRL      &kp LSHFT     &none                    &none            &none            &none         &none         &none         &none
-&none  &none     &none        &none          &none         &none   &none     &none  &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_hue      &rgb_sat      &rgb_brt      &rgb_spe
+&none  &none     &none        &none          &none         &none   &none     &none  &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &u_rgb_hue      &u_rgb_sat      &u_rgb_brt      &u_rgb_spe
                  &none        &none          &trans        &trans  &trans    &none  &none            &none            &none         &none
             >;
         };
 
         Mouse {
             display-name = "Mouse";
+
             bindings = <
 &none  &none     &none        &none          &none         &none                        &none      &none         &none      &none           &none       &none
-&none  &U_boot   &u_to_U_TAP  &u_to_U_EXTRA  &u_to_U_BASE  &none                        &kp PG_UP  &msc SCRL_UP  &mse_up    &msc SCRL_DOWN  &kp INS     &none
-&none  &kp LGUI  &kp LALT     &kp LCTRL      &kp LSHFT     &none                        &kp PG_DN  &mse_lft      &mse_dn    &mse_rgt        &caps_word  &none
+&none  &u_td_boot   &u_td_tap  &u_td_qwerty  &u_td_base  &none                        &kp PG_UP  &msc SCRL_UP  &u_mse_up    &msc SCRL_DOWN  &kp INS     &none
+&none  &kp LGUI  &kp LALT     &kp LCTRL      &kp LSHFT     &none                        &kp PG_DN  &u_mse_lft      &u_mse_dn    &u_mse_rgt        &caps_word  &none
 &none  &none     &none        &none          &none         &none   &none     &none      &kp LC(Y)  &kp LC(X)     &kp LC(C)  &kp LC(V)       &kp LC(Z)   &none
                  &none        &none          &trans        &trans  &trans    &mkp RCLK  &mkp LCLK  &mkp MCLK     &none      &none
             >;
-
-            label = "Mouse";
         };
 
+        // Reserved/spare slots so ZMK Studio can add layers at runtime.
         extra4 { status = "reserved"; };
 
-        layer_9 {
+        Spare {
+            display-name = "Spare";
+
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
