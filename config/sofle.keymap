@@ -46,10 +46,11 @@
             bindings = <&mo>, <&kp>;
         };
 
-        // Home-row mods, left hand: only trigger the hold on a right-hand key.
-        u_hml: u_hml {
+        // SHIFT tier, left hand (T): balanced, eager hold so mid-flow capitals
+        // fire on a cross-hand roll. Kept "as it stands now" (idle 150).
+        hm_shift_l: hm_shift_l {
             compatible = "zmk,behavior-hold-tap";
-            label = "U_HML";
+            label = "HM_SHIFT_L";
             #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <280>;
@@ -60,10 +61,10 @@
             hold-trigger-on-release;
         };
 
-        // Home-row mods, right hand: only trigger the hold on a left-hand key.
-        u_hmr: u_hmr {
+        // SHIFT tier, right hand (N): mirror of hm_shift_l.
+        hm_shift_r: hm_shift_r {
             compatible = "zmk,behavior-hold-tap";
-            label = "U_HMR";
+            label = "HM_SHIFT_R";
             #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <280>;
@@ -72,6 +73,29 @@
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <0 12 24 36 37 25 13 1 2 14 26 38 50 51 39 27 15 3 4 28 16 40 52 53 41 17 29 5 54 42>;
             hold-trigger-on-release;
+        };
+
+        // MOD tier, left hand (GUI/ALT/CTRL): tap-preferred baseline reverted
+        // to the proven pre-refactor settings. Only triggers on a right-hand key.
+        u_mt_l: u_mt_l {
+            compatible = "zmk,behavior-hold-tap";
+            label = "U_MT_L";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <240>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <6 18 30 44 56 57 45 31 19 7 8 20 32 46 58 59 47 33 21 9 10 22 34 48 49 35 23 11 55 43>;
+        };
+
+        // MOD tier, right hand: mirror of u_mt_l. Only triggers on a left-hand key.
+        u_mt_r: u_mt_r {
+            compatible = "zmk,behavior-hold-tap";
+            label = "U_MT_R";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <240>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 12 24 36 37 25 13 1 2 14 26 38 50 51 39 27 15 3 4 28 16 40 52 53 41 17 29 5 54 42>;
         };
 
         // RGB controls: tap = increase, shift+tap = decrease.
@@ -197,7 +221,7 @@
             bindings = <
 &none  &kp N1          &kp N2          &kp N3           &kp N4           &kp N5                                       &kp N6         &kp N7           &kp N8           &kp N9          &kp N0               &kp BSPC
 &none  &kp Q           &kp W           &kp F            &kp P            &kp B                                        &kp J          &kp L            &kp U            &kp Y           &kp SEMI             &none
-&none  &u_hml LGUI A  &u_hml LALT R  &u_hml LCTRL S  &u_hml LSHFT T  &kp G                                        &kp M          &u_hmr RSHFT N  &u_hmr RCTRL E  &u_hmr RALT I  &u_hmr RIGHT_GUI O  &kp APOS
+&none  &u_mt_l LGUI A  &u_mt_l LALT R  &u_mt_l LCTRL S  &hm_shift_l LSHFT T  &kp G                                        &kp M          &hm_shift_r RSHFT N  &u_mt_r RCTRL E  &u_mt_r RALT I  &u_mt_r RIGHT_GUI O  &kp APOS
 &none  &kp Z           &kp X           &kp C            &kp D            &kp V       &kp C_MUTE  &kp PSCRN            &kp K          &kp H            &kp COMMA        &kp DOT         &kp FSLH             &none
                        &u_work_email     &mo MOUSE        &u_lt ADJUST ESC  &u_lt NAV ENTER  &u_lt NUM TAB  &u_lt BASE BACKSPACE  &u_lt SYM SPACE  &u_lt BASE DELETE  &none  &none
             >;
