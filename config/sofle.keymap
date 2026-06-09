@@ -75,6 +75,116 @@
             hold-trigger-on-release;
         };
 
+        // ---- SHIFT tuning ladder (ZMK Studio scratch variants) -------------
+        // Identical to hm_shift_l/r except require-prior-idle-ms. Lower idle =
+        // hold can fire sooner after a prior key = fewer `ti` false-negatives
+        // (at a small cost in benign stray-capital misfires). Flip T/N to a
+        // lower-numbered variant in Studio if `ti` lingers; bake the winner
+        // into hm_shift_l/r and delete these once tuned. Kept in the build by
+        // CONFIG_ZMK_BEHAVIORS_KEEP_ALL (set in sofle.conf + studio snippet).
+        //   base hm_shift_l/r = 150  →  120  →  90  →  60  →  30
+        // --------------------------------------------------------------------
+
+        hm_shift_l_120: hm_shift_l_120 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_SHIFT_L_120";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <120>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <6 18 30 44 56 57 45 31 19 7 8 20 32 46 58 59 47 33 21 9 10 22 34 48 49 35 23 11 55 43>;
+            hold-trigger-on-release;
+        };
+        hm_shift_r_120: hm_shift_r_120 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_SHIFT_R_120";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <120>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 12 24 36 37 25 13 1 2 14 26 38 50 51 39 27 15 3 4 28 16 40 52 53 41 17 29 5 54 42>;
+            hold-trigger-on-release;
+        };
+
+        hm_shift_l_90: hm_shift_l_90 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_SHIFT_L_90";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <90>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <6 18 30 44 56 57 45 31 19 7 8 20 32 46 58 59 47 33 21 9 10 22 34 48 49 35 23 11 55 43>;
+            hold-trigger-on-release;
+        };
+        hm_shift_r_90: hm_shift_r_90 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_SHIFT_R_90";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <90>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 12 24 36 37 25 13 1 2 14 26 38 50 51 39 27 15 3 4 28 16 40 52 53 41 17 29 5 54 42>;
+            hold-trigger-on-release;
+        };
+
+        hm_shift_l_60: hm_shift_l_60 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_SHIFT_L_60";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <60>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <6 18 30 44 56 57 45 31 19 7 8 20 32 46 58 59 47 33 21 9 10 22 34 48 49 35 23 11 55 43>;
+            hold-trigger-on-release;
+        };
+        hm_shift_r_60: hm_shift_r_60 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_SHIFT_R_60";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <60>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 12 24 36 37 25 13 1 2 14 26 38 50 51 39 27 15 3 4 28 16 40 52 53 41 17 29 5 54 42>;
+            hold-trigger-on-release;
+        };
+
+        hm_shift_l_30: hm_shift_l_30 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_SHIFT_L_30";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <30>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <6 18 30 44 56 57 45 31 19 7 8 20 32 46 58 59 47 33 21 9 10 22 34 48 49 35 23 11 55 43>;
+            hold-trigger-on-release;
+        };
+        hm_shift_r_30: hm_shift_r_30 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HM_SHIFT_R_30";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <30>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 12 24 36 37 25 13 1 2 14 26 38 50 51 39 27 15 3 4 28 16 40 52 53 41 17 29 5 54 42>;
+            hold-trigger-on-release;
+        };
+
         // MOD tier, left hand (GUI/ALT/CTRL): tap-preferred baseline reverted
         // to the proven pre-refactor settings. Only triggers on a right-hand key.
         hm_mod_l: hm_mod_l {
