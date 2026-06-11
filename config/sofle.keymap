@@ -46,6 +46,20 @@
             bindings = <&mo>, <&kp>;
         };
 
+        // Layer-tap with quick-tap: a tap immediately followed by a press
+        // (within quick-tap-ms) sends the tap keycode held down, so it
+        // auto-repeats instead of activating the layer. Used on the right
+        // thumb cluster (backspace/space/delete) for hold-to-repeat.
+        u_lt_rep: u_lt_rep {
+            compatible = "zmk,behavior-hold-tap";
+            label = "U_LT_REP";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <220>;
+            quick-tap-ms = <200>;
+            bindings = <&mo>, <&kp>;
+        };
+
         // SHIFT tier, left hand (T): balanced, eager hold so mid-flow capitals
         // fire on a cross-hand roll. Kept "as it stands now" (idle 150).
         hm_shift_l: hm_shift_l {
@@ -335,7 +349,7 @@
 &none  &kp Q           &kp W           &kp F            &kp P            &kp B                                        &kp J          &kp L            &kp U            &kp Y           &kp SEMI             &none
 &none  &hm_mod_l LGUI A  &hm_mod_l LALT R  &hm_mod_l LCTRL S  &hm_shift_l LSHFT T  &kp G                                        &kp M          &hm_shift_r RSHFT N  &hm_mod_r RCTRL E  &hm_mod_r RALT I  &hm_mod_r RIGHT_GUI O  &kp APOS
 &none  &kp Z           &kp X           &kp C            &kp D            &kp V       &kp C_MUTE  &kp PSCRN            &kp K          &kp H            &kp COMMA        &kp DOT         &kp FSLH             &none
-                       &u_work_email     &mo MOUSE        &u_lt ADJUST ESC  &u_lt NAV ENTER  &u_lt NUM TAB  &u_lt BASE BACKSPACE  &u_lt SYM SPACE  &u_lt BASE DELETE  &none  &none
+                       &u_work_email     &mo MOUSE        &u_lt ADJUST ESC  &u_lt NAV ENTER  &u_lt NUM TAB  &u_lt_rep BASE BACKSPACE  &u_lt_rep SYM SPACE  &u_lt_rep BASE DELETE  &none  &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
