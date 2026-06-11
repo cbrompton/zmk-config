@@ -81,7 +81,9 @@
         // (at a small cost in benign stray-capital misfires). Flip T/N to a
         // lower-numbered variant in Studio if `ti` lingers; bake the winner
         // into hm_shift_l/r and delete these once tuned. Kept in the build by
-        // CONFIG_ZMK_BEHAVIORS_KEEP_ALL (set in sofle.conf + studio snippet).
+        // ZMK_BEHAVIORS_KEEP_ALL, which the studio-rpc-usb-uart snippet in
+        // build.yaml auto-defines for both halves (a preprocessor flag, not a
+        // CONFIG_ Kconfig symbol — so nothing to set in sofle.conf).
         //   base hm_shift_l/r = 150  →  120  →  90  →  60  →  30
         // --------------------------------------------------------------------
 
