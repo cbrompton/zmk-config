@@ -319,6 +319,12 @@
             #binding-cells = <0>;
             bindings = <&none>, <&bootloader>;
         };
+        graveTilde: graveTilde {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp TILDE>, <&kp GRAVE>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
     };
 
     macros {
@@ -421,7 +427,7 @@
 &none  &none           &none             &none              &none                 &none                                       &none   &none         &none          &none        &none     &none
 &none  &kp LEFT_BRACE  &kp AMPS          &kp ASTRK          &kp LEFT_PARENTHESIS  &kp RIGHT_BRACE                             &none   &u_td_base  &u_td_qwerty  &u_td_tap  &u_td_boot   &none
 &none  &kp COLON       &kp DOLLAR        &kp PERCENT        &kp CARET             &kp PLUS                                    &none   &kp LSHFT     &kp LCTRL      &kp LALT     &kp LGUI  &none
-&none  &kp TILDE       &kp EXCL          &kp AT             &kp POUND             &kp BACKSLASH          &none        &none   &none   &none         &none          &none        &none     &none
+&none  &graveTilde       &kp EXCL          &kp AT             &kp POUND             &kp BACKSLASH          &none        &none   &none   &none         &none          &none        &none     &none
                        &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDER    &trans  &trans  &trans        &none          &none
             >;
         };
