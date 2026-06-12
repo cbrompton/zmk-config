@@ -357,7 +357,7 @@
 &none  &kp Q           &kp W           &kp F            &kp P            &kp B                                        &kp J          &kp L            &kp U            &kp Y           &kp SEMI             &none
 &none  &hm_mod_l LGUI A  &hm_mod_l LALT R  &hm_mod_l LCTRL S  &hm_shift_l LSHFT T  &kp G                                        &kp M          &hm_shift_r RSHFT N  &hm_mod_r RCTRL E  &hm_mod_r RALT I  &hm_mod_r RIGHT_GUI O  &kp APOS
 &none  &kp Z           &kp X           &kp C            &kp D            &kp V       &kp C_MUTE  &kp PSCRN            &kp K          &kp H            &kp COMMA        &kp DOT         &kp FSLH             &none
-                       &u_work_email     &mo MOUSE        &u_lt ADJUST ESC  &u_lt NAV ENTER  &u_lt NUM TAB  &u_lt_rep BASE BACKSPACE  &u_lt_rep SYM SPACE  &u_lt_rep BASE DELETE  &none  &none
+                       &u_work_email     &mo MOUSE        &u_lt ADJUST ESC  &u_lt NAV ENTER  &u_lt NUM TAB  &u_lt_rep BASE BACKSPACE  &u_lt_rep SYM SPACE  &u_lt_rep FUN DELETE  &none  &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -466,7 +466,8 @@
         // number row: F7/F8/F9, F4/F5/F6, F1/F2/F3 on the ring/middle/index
         // columns, with F12/F11/F10 top-to-bottom on the pinky. The right hand
         // mirrors the Sym layer exactly (layer tap-dances + GACS mods). Spare
-        // Sofle columns are left as &none. Not yet bound to an access key.
+        // Sofle columns are left as &none. Access: hold the Base layer's
+        // outer right thumb key (position 57, tap = delete).
         Fn {
             display-name = "Fn";
 
