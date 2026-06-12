@@ -23,7 +23,9 @@
 #define SYM    5
 #define ADJUST 6
 #define MOUSE  7
-// 8 (extra4) and 9 are reserved/spare slots for ZMK Studio runtime layers.
+// 8 = extra4 (reserved ZMK Studio runtime slot)
+#define FUN    9
+// 10 = Spare (transparent ZMK Studio runtime slot)
 
 / {
     combos {
@@ -458,6 +460,24 @@
 
         // Reserved/spare slots so ZMK Studio can add layers at runtime.
         extra4 { status = "reserved"; };
+
+        // Function layer (Miryoku-style, F-keys only). Left hand places the
+        // F-keys in the same keypad layout the Sym layer uses for the shifted
+        // number row: F7/F8/F9, F4/F5/F6, F1/F2/F3 on the ring/middle/index
+        // columns, with F12/F11/F10 top-to-bottom on the pinky. The right hand
+        // mirrors the Sym layer exactly (layer tap-dances + GACS mods). Spare
+        // Sofle columns are left as &none. Not yet bound to an access key.
+        Fn {
+            display-name = "Fn";
+
+            bindings = <
+&none  &none    &none   &none   &none   &none                                       &none  &none       &none         &none      &none       &none
+&none  &kp F12  &kp F7  &kp F8  &kp F9  &none                                       &none  &u_td_base  &u_td_qwerty  &u_td_tap  &u_td_boot  &none
+&none  &kp F11  &kp F4  &kp F5  &kp F6  &none                                       &none  &kp LSHFT   &kp LCTRL     &kp LALT   &kp LGUI    &none
+&none  &kp F10  &kp F1  &kp F2  &kp F3  &none        &none           &none          &none  &none       &none         &none      &none       &none
+                &none   &none   &none   &none        &none    &trans  &trans         &trans  &none       &none
+            >;
+        };
 
         Spare {
             display-name = "Spare";
